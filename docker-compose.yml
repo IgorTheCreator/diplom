@@ -79,7 +79,7 @@ services:
 
   app:
     container_name: ${APP_CONTAINER_NAME}
-    build: ./nestjs-project
+    build: ./nestjs-auth
     volumes:
       - app_data:/data/app
     networks:
