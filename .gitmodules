@@ -1,0 +1,3 @@
+[submodule "nestjs-auth"]
+	path = nestjs-auth
+	url = https://github.com/IgorTheCreator/nestjs-auth.git
