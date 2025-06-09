@@ -104,12 +104,40 @@ services:
       options:
         tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
 
+  app2:
+    container_name: ${APP_CONTAINER_NAME_2}
+    build: ./nestjs-auth
+    volumes:
+      - app_data2:/data/app
+    networks:
+      - app
+      - metrics
+    depends_on:
+      - db
+      - cache
+    environment:
+      - APP_PORT=${APP_PORT_2}
+      - DB_URL=${DB_URL}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_TOKEN_VALID=${JWT_TOKEN_VALID}
+      - REFRESH_TOKEN_VALID=${REFRESH_TOKEN_VALID}
+      - CACHE_PASSWORD=${CACHE_PASSWORD}
+      - CACHE_PORT=${CACHE_PORT}
+      - CACHE_HOST=${CACHE_HOST}
+    ports:
+      - '${APP_PORT_2}:${APP_PORT_2}'
+    logging:
+      driver: json-file
+      options:
+        tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
+
 volumes:
   grafanadata:
   prometheusdata:
   db_data_new:
   cache_data:
   app_data:
+  app_data2:
 
 networks:
   app:
